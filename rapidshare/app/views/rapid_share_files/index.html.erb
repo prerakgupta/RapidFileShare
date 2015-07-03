@@ -1,0 +1,18 @@
+<h1>Root Directory</h1>
+
+<% flash.each do |name, msg| %>
+  <%= content_tag :div, msg, class: "alert alert-info" %>
+<% flash.delete(name) %>
+<% end %>
+<%= link_to 'Upload New File', action: 'new' %><br/><br/>
+<% index = 1 %>
+<table>
+  <% @all_files.each do |file| %>
+    <tr>
+      <td><%= index %>. </td>
+      <td><%= link_to file.title, rapid_share_file_path(file) %></td>
+      <td><%= link_to "Delete", rapid_share_file_path(file), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% index+=1 %>
+    </tr>
+  <% end %>  
+</table>
