@@ -1,3 +1,0 @@
-<%= form_tag({action: :create}, multipart: true) do %>
-   <%= file_field_tag 'file' %>
-<% end %>
