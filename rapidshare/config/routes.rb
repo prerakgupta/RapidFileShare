@@ -15,6 +15,13 @@ Rails.application.routes.draw do
   #   resources :products
   
       resources :rapid_share_files	
+      resources :users do
+      	collection do
+	   get 'register'
+	   post 'login'
+	   get 'logout'
+	end
+      end	   	
 
   # Example resource route with options:
   #   resources :products do

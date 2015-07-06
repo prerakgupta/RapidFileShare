@@ -1,0 +1,16 @@
+<h1>Please enter the following details to register</h1>
+<%= render 'messages/message' %>
+
+<%= form_tag({action: :create}) do %>
+
+  <%= label_tag 'Username: ' %><br>
+  <%= text_field_tag :username %><br><br>
+
+  <%= label_tag 'Password: ' %><br>
+  <%= password_field_tag :password %><br><br>
+
+  <%= label_tag 'Confirm Password: ' %><br>
+  <%= password_field_tag :password_confirmation %><br><br>
+
+  <%= submit_tag 'Login' %><br><br>
+<% end %>

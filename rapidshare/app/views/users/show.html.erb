@@ -1,0 +1,11 @@
+<% index = 1 %>
+<table>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= index %>. </td>
+      <td><%= user.username %></td>
+      <td><%= user.password %></td>
+      <% index+=1 %>
+    </tr>
+  <% end %>
+</table>

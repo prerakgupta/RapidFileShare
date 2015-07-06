@@ -1,18 +1,37 @@
-<h1>Root Directory</h1>
+<div align="right"
+  <h2><%= link_to "Logout", logout_users_path %></h2>
+</div>
 
+<div align="left">
+  Logged in as <%= session[:username] %>
+</div>
+
+<center>
+<h1>Root directory</h1>
 <% flash.each do |name, msg| %>
   <%= content_tag :div, msg, class: "alert alert-info" %>
 <% flash.delete(name) %>
 <% end %>
-<%= link_to 'Upload New File', action: 'new' %><br/><br/>
+
+<h2>Upload File</h2>
+<%= form_tag({action: :create}, multipart: true) do %>
+   <%= file_field_tag 'file' %> <%= submit_tag("Submit") %>
+   <br/><br/>
+<% end %>
+
 <% index = 1 %>
 <table>
-  <% @all_files.each do |file| %>
-    <tr>
-      <td><%= index %>. </td>
-      <td><%= link_to file.title, rapid_share_file_path(file) %></td>
-      <td><%= link_to "Delete", rapid_share_file_path(file), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <% index+=1 %>
-    </tr>
+  <% if !@all_files.blank? %>
+    <% @all_files.each do |file| %>
+      <tr>
+        <td><%= index %>. </td>
+        <td><%= link_to file.title, rapid_share_file_path(file) %></td>
+        <td><%= link_to "Delete", rapid_share_file_path(file), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% index+=1 %>
+      </tr>
+    <% end %>
+  <% else %>
+     "You haven't uploaded any files yet."
   <% end %>  
 </table>
+</center>
