@@ -1,0 +1,35 @@
+Logged in as <%= current_user.email %>
+<div align="right">
+  <h3><%= link_to "Logout", destroy_user_session_path %></h3>
+</div>
+
+<center>
+<h1>Root directory</h1>
+<% flash.each do |name, msg| %>
+  <%= content_tag :div, msg, class: "alert alert-info" %>
+<% flash.delete(name) %>
+<% end %>
+
+<h2>Upload File</h2>
+<%= form_tag({action: :create}, multipart: true) do %>
+   <%= file_field_tag 'file' %> <%= submit_tag("Submit") %>
+   <br/><br/>
+<% end %>
+
+<% index = 1 %>
+<table>
+  <%= @files.inspect %>
+  <% if @files.respond_to?(:each) %>
+    <% @files.each do |f| %>
+      <tr>
+        <td><%= index %>. </td>
+        <td><%= link_to f.file_identifier, rapid_share_file_path(f) %></td>
+        <td><%= link_to "Delete", rapid_share_file_path(f), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% index+=1 %>
+      </tr>
+    <% end %>
+  <% else %>
+     "You haven't uploaded any files yet."
+  <% end %>
+</table>
+</center>
