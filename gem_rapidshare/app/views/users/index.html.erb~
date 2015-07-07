@@ -1,0 +1,40 @@
+<% if false  %>
+ <div align="right">
+  <h2><%= link_to "Logout", logout_users_path %></h2>
+</div>
+
+<div align="left">
+  Logged in as <%= session[:username] %>
+</div>
+
+<% end %>
+
+<center>
+<h1>Root directory</h1>
+<% flash.each do |name, msg| %>
+  <%= content_tag :div, msg, class: "alert alert-info" %>
+<% flash.delete(name) %>
+<% end %>
+
+<h2>Upload File</h2>
+<%= form_tag({action: :create}, multipart: true) do %>
+   <%= file_field_tag 'file' %> <%= submit_tag("Submit") %>
+   <br/><br/>
+<% end %>
+
+<% index = 1 %>
+<table>
+  <% if !@files.blank? %>
+    <% @files.each do |f| %>
+      <tr>
+        <td><%= index %>. </td>
+        <td><%= link_to f.file_identifier, user_path(f) %></td>
+        <td><%= link_to "Delete", user_path(f), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% index+=1 %>
+      </tr>
+    <% end %>
+  <% else %>
+     "You haven't uploaded any files yet."
+  <% end %>
+</table>
+</center>
