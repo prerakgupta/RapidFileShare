@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  
+
   devise_for :users
-  root to: "rapid_share_files#index"
-  resources :rapid_share_files
+  resources "rapidshare", :controller => :rapid_share_files, :as => :rapid_share_files
+  root to: "rapidshare#index" 
+  #get "rapidshare" => "rapid_share_files#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
