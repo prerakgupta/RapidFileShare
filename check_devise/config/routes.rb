@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources "rapidshare", :controller => :rapid_share_files, :as => :rapid_share_files
-  root to: "rapidshare#index" 
+  root to: "rapid_share_files#index" 
   #get "rapidshare" => "rapid_share_files#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
